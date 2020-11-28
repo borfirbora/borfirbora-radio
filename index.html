@@ -12,8 +12,43 @@
     </ul>
     <h1>Borfirbora Radio</h1>
 <p>Aşağıdaki <b>Oynat</b> düğmesini kullanarak canlı yayını dinleyebilirsin. Eğer istek göndermek istersen oynatıcının altındaki formu kullanabilirsin!</p>
-<audio controls>
-    <source src="http://78.129.139.48:8183/stream" type="audio/mpeg">
-</audio>
-</body>
-</html>78.129.139.48:8183/stream
+
+    <button onclick="play()">Oynat</button>
+    <script>
+    function play(){
+    var p=new audio();
+        p.src="http://78.129.139.48:8183/stream";
+        p.volume=0.1;
+        p.play();
+    }
+    </script>
+
+    </body>
+</html>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borfirbora Radio</title>
+</head>
+<body>
+    <ul>
+        <li><a href="https://borfirbora.com/">Borfirbora Ana Sayfa</a></li>
+            <li><a href="http://78.129.139.48:8183/stream">Kendi Oynatıcınızda Dinleyin</a></li>
+    </ul>
+    <h1>Borfirbora Radio</h1>
+<p>Aşağıdaki <b>Oynat</b> düğmesini kullanarak canlı yayını dinleyebilirsin. Eğer istek göndermek istersen oynatıcının altındaki formu kullanabilirsin!</p>
+
+    <button onclick="play();return(false)">Oynat</button>
+    <script>
+    function play(){
+    var p= new Audio();
+        p.src="http://78.129.139.48:8183/stream";
+        p.volume=0.1;
+        p.play();
+    }
+    </script>
+
+    </body>
+</html>
