@@ -11,24 +11,16 @@
 <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script>
 
 <body>
-    <ul>
-        <li><a href="https://borfirbora.com/">Borfirbora Ana Sayfa</a></li>
-            <li><a href="http://78.129.139.48:8183/stream">Kendi Oynatıcınızda Dinleyin</a></li>
-    </ul>
-    <h1>Borfirbora Radio</h1>
-<p>Aşağıdaki <b>Oynat</b> düğmesini kullanarak canlı yayını dinleyebilirsin. Eğer istek göndermek istersen oynatıcının altındaki formu kullanabilirsin!</p>
-<h1>İstek paneli!</h1>
-    <label for="isim">İsminiz:</label>
-    <input type="text" id="isim" />
-    <label for="istek">İstek şarkınız:</label>
-    <input type="text" id="istek" />
-    <label for="mesaj">Mesajınız:</label>
-    <textarea cols="40" rows="15" id="mesaj"></textarea>
-    <button id="gonder">Gönder</button>
+<h1>İstek Listesi</h1>    
+<button id="sil">Tümünü Sil</button>
+<div id="liste">
+<ul>
 
+</ul>
+</div>
 <script>
     $(document).ready(function(){
-      var firebaseConfig = {
+        var firebaseConfig = {
         apiKey: "AIzaSyDiJ7xOsblIDpC9qBH-adpx1gqRYefuwD0",
         authDomain: "barkod-deposu.firebaseapp.com",
         databaseURL: "https://barkod-deposu.firebaseio.com",
@@ -39,22 +31,27 @@
       };
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
-    
-$("#gonder").click(function(){
-var isim=$("#isim").val();
-var istek = $("#istek").val();
-var mesaj = $("#mesaj").val();
 
-firebase.database().ref().child("istek").push(
-    {
-        isim : isim,
-        istek : istek,
-        mesaj : mesaj,
-    }
-);
+$("#sil").click(function(){
+firebase.database().ref().child("istek").remove();
+});
 
+var alan = firebase.database().ref().child("istek");
+alan.on("value", function(veri){
+    var $parent = $("#liste").children("ul");
+    $parent.html("");
+    veri.forEach(function(istek){
+        var b = istek.val().istek;
+        var a = istek.val().isim;
+var c = istek.val().mesaj;
+$parent.append("<li>"+a+", "+b+" Şarkısını istiyor ve diyor ki: "+c+"</li>");
+    });
+    var ses= new Audio();
+ses.src="ses.mp3";
+ses.load();
+ses.play();
 });
-});
+    });
 </script>
-    </body>
+</body>
 </html>
